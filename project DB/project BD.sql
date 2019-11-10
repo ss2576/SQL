@@ -3,19 +3,19 @@ CREATE DATABASE medical_clinic;
 
 USE medical_clinic;
 
--- пользователи БД --
+-- РїРѕР»СЊР·РѕРІР°С‚РµР»Рё Р‘Р” --
 DROP TABLE IF EXISTS user_profiles;
 CREATE TABLE user_profiles (
 	id_user SERIAL PRIMARY KEY,
-	firstname VARCHAR(50) COMMENT 'Имя',
-	lastname VARCHAR(50) COMMENT 'Фамилия',
-	middlename VARCHAR(50) COMMENT 'Отчество',
+	firstname VARCHAR(50) COMMENT 'РРјСЏ',
+	lastname VARCHAR(50) COMMENT 'Р¤Р°РјРёР»РёСЏ',
+	middlename VARCHAR(50) COMMENT 'РћС‚С‡РµСЃС‚РІРѕ',
 	birthday DATE,
-	gender ENUM('Мужчина', 'Женщина'),
+	gender ENUM('РњСѓР¶С‡РёРЅР°', 'Р–РµРЅС‰РёРЅР°'),
 	email VARCHAR(120) UNIQUE,
-	post VARCHAR(50) COMMENT 'должность',
-	role VARCHAR(50) COMMENT 'роль',
-	filial VARCHAR(50) COMMENT 'филиал',
+	post VARCHAR(50) COMMENT 'РґРѕР»Р¶РЅРѕСЃС‚СЊ',
+	role VARCHAR(50) COMMENT 'СЂРѕР»СЊ',
+	filial VARCHAR(50) COMMENT 'С„РёР»РёР°Р»',
 	created_at DATETIME DEFAULT NOW(),
 	INDEX firstname_idx (firstname),
 	INDEX lastname_idx (lastname),
@@ -23,34 +23,34 @@ CREATE TABLE user_profiles (
 	INDEX post_idx (post),
 	INDEX role_idx (role));
 
--- список пациентов --
+-- СЃРїРёСЃРѕРє РїР°С†РёРµРЅС‚РѕРІ --
 DROP TABLE IF EXISTS patient_profiles;
 CREATE TABLE patient_profiles (
 	id_profiles SERIAL PRIMARY KEY,
-	firstname VARCHAR(50) COMMENT 'Имя',
-	lastname VARCHAR(50) COMMENT 'Фамилия',
-	middlename VARCHAR(50) COMMENT 'Отчество',
+	firstname VARCHAR(50) COMMENT 'РРјСЏ',
+	lastname VARCHAR(50) COMMENT 'Р¤Р°РјРёР»РёСЏ',
+	middlename VARCHAR(50) COMMENT 'РћС‚С‡РµСЃС‚РІРѕ',
 	birthday DATE,
-	gender ENUM('Мужчина', 'Женщина'),
+	gender ENUM('РњСѓР¶С‡РёРЅР°', 'Р–РµРЅС‰РёРЅР°'),
 	email VARCHAR(120) UNIQUE,
 	phone BIGINT,
-	police VARCHAR(50) COMMENT '№ страхового полиса',
-	hometown VARCHAR(200) COMMENT 'адрес места жительства',
+	police VARCHAR(50) COMMENT 'в„– СЃС‚СЂР°С…РѕРІРѕРіРѕ РїРѕР»РёСЃР°',
+	hometown VARCHAR(200) COMMENT 'Р°РґСЂРµСЃ РјРµСЃС‚Р° Р¶РёС‚РµР»СЊСЃС‚РІР°',
 	created_at DATETIME DEFAULT NOW(),
-	medical_card BIGINT COMMENT '№ электронной медицинской карты',
+	medical_card BIGINT COMMENT 'в„– СЌР»РµРєС‚СЂРѕРЅРЅРѕР№ РјРµРґРёС†РёРЅСЃРєРѕР№ РєР°СЂС‚С‹',
 	INDEX firstname_idx (firstname),
 	INDEX lastname_idx (lastname),
 	INDEX middlename_idx (middlename),
 	INDEX police_idx (police),
 	INDEX medical_card_idx (medical_card));
 
--- справочник должностей --
+-- СЃРїСЂР°РІРѕС‡РЅРёРє РґРѕР»Р¶РЅРѕСЃС‚РµР№ --
 DROP TABLE IF EXISTS user_posts;
 CREATE TABLE user_posts (
 	id_posts SERIAL PRIMARY KEY,
-	code_posts INT(10)COMMENT 'код должности',
-	name_posts VARCHAR(50) COMMENT 'имя должности',
-	notice_posts VARCHAR(50) COMMENT 'примечание');
+	code_posts INT(10)COMMENT 'РєРѕРґ РґРѕР»Р¶РЅРѕСЃС‚Рё',
+	name_posts VARCHAR(50) COMMENT 'РёРјСЏ РґРѕР»Р¶РЅРѕСЃС‚Рё',
+	notice_posts VARCHAR(50) COMMENT 'РїСЂРёРјРµС‡Р°РЅРёРµ');
 	
 	
 	
