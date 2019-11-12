@@ -4,82 +4,84 @@ CREATE DATABASE medical_clinic;
 USE medical_clinic;
 
 
--- СЃРїСЂР°РІРѕС‡РЅРёРє РґРѕР»Р¶РЅРѕСЃС‚РµР№ --
+-- справочник должностей --
 DROP TABLE IF EXISTS user_posts;
 CREATE TABLE user_posts (
 	id_posts SERIAL PRIMARY KEY,
-	code_posts INT(10) COMMENT 'РєРѕРґ РґРѕР»Р¶РЅРѕСЃС‚Рё',
-	name_posts VARCHAR(50) COMMENT 'РёРјСЏ РґРѕР»Р¶РЅРѕСЃС‚Рё',
-	notice_posts VARCHAR(50) COMMENT 'РїСЂРёРјРµС‡Р°РЅРёРµ');
+	code_posts INT(10) COMMENT 'код должности',
+	name_posts VARCHAR(50) COMMENT 'имя должности',
+	notice_posts VARCHAR(50) COMMENT 'примечание');
 
 
 
--- СЃРїСЂР°РІРѕС‡РЅРёРє СЂРѕР»РµР№ --
+-- справочник ролей --
 DROP TABLE IF EXISTS user_roles;
 CREATE TABLE user_roles (
 	id_roles SERIAL PRIMARY KEY,
-	code_roles INT(10) COMMENT 'РєРѕРґ СЂРѕР»Рё',
-	name_roles VARCHAR(50) COMMENT 'РёРјСЏ СЂРѕР»Рё',
-	notice_roles VARCHAR(50) COMMENT 'РїСЂРёРјРµС‡Р°РЅРёРµ');
+	code_roles INT(10) COMMENT 'код роли',
+	name_roles VARCHAR(50) COMMENT 'имя роли',
+	notice_roles VARCHAR(50) COMMENT 'примечание');
 
 
--- СЃРїСЂР°РІРѕС‡РЅРёРє С„РёР»РёР°Р»РѕРІ --
+-- справочник филиалов --
 DROP TABLE IF EXISTS filials;
 CREATE TABLE filials (
 	id_filials SERIAL PRIMARY KEY,
-	code_filials INT(10) COMMENT 'РєРѕРґ С„РёР»РёР°Р»Р°',
-	name_filials VARCHAR(50) COMMENT 'РЅР°Р·РІР°РЅРёРµ С„РёР»РёР°Р»Р°',
-	hometown_filials VARCHAR(200) COMMENT 'Р°РґСЂРµСЃ С„РёР»РёР°Р»Р°',
+	code_filials INT(10) COMMENT 'код филиала',
+	name_filials VARCHAR(50) COMMENT 'название филиала',
+	hometown_filials VARCHAR(200) COMMENT 'адрес филиала',
 	phone_filials BIGINT,
-	bankname_filials VARCHAR(50) COMMENT 'РЅР°Р·РІР°РЅРёРµ Р±Р°РЅРєР°',
-	bankaccount_filials VARCHAR(50) COMMENT 'СЂР°СЃС‡С‘С‚РЅС‹Р№ СЃС‡С‘С‚',
+	bankname_filials VARCHAR(50) COMMENT 'название банка',
+	bankaccount_filials VARCHAR(50) COMMENT 'расчётный счёт',
 	inn_filials INT(12),
 	OGRN_filials INT(12),	
-	notice_filials VARCHAR(50) COMMENT 'РїСЂРёРјРµС‡Р°РЅРёРµ');
+	notice_filials VARCHAR(50) COMMENT 'примечание');
 
 
--- СЃРїСЂР°РІРѕС‡РЅРёРє Р»РµРєР°СЂСЃС‚РІ --
+-- справочник лекарств --
 DROP TABLE IF EXISTS drugs;
 CREATE TABLE drugs (
 	id_chambers SERIAL PRIMARY KEY,
-	code_drugs INT(10) COMMENT 'РєРѕРґ Р»РµРєР°СЂСЃС‚РІР°',
-	name_drugs VARCHAR(200) COMMENT 'РЅР°Р·РІР°РЅРёРµ Р»РµРєР°СЂСЃС‚РІР°',
-	notice_drugs VARCHAR(200) COMMENT 'РїСЂРёРјРµС‡Р°РЅРёРµ');
+	code_drugs INT(10) COMMENT 'код лекарства',
+	name_drugs VARCHAR(200) COMMENT 'название лекарства',
+	notice_drugs VARCHAR(200) COMMENT 'примечание');
 
 
--- РїР°Р»Р°С‚С‹ СЃС‚Р°С†РёРѕРЅР°СЂР° --
+-- палаты стационара --
 DROP TABLE IF EXISTS chambers;
 CREATE TABLE chambers (
 	id_chambers SERIAL PRIMARY KEY,
-	number_chambers INT(10) COMMENT 'РЅРѕРјРµСЂ РїР°Р»Р°С‚С‹',
-	code_chambers INT(10) COMMENT 'РєРѕРґ РѕС‚РґРµР»РµРЅРёСЏ',
-	department_chamber VARCHAR(50) COMMENT 'РЅР°Р·РІР°РЅРёРµ РѕС‚РґРµР»РµРЅРёСЏ',
-	notice_chamber VARCHAR(200) COMMENT 'РїСЂРёРјРµС‡Р°РЅРёРµ');
+	number_chambers INT(10) COMMENT 'номер палаты',
+	code_chambers INT(10) COMMENT 'код отделения',
+	department_chamber VARCHAR(50) COMMENT 'название отделения',
+	notice_chamber VARCHAR(200) COMMENT 'примечание');
 
 
--- СЃРїСЂР°РІРѕС‡РЅРёРє Р·Р°Р±РѕР»РµРІР°РЅРёР№ --
+-- справочник заболеваний --
 DROP TABLE IF EXISTS diseases;
 CREATE TABLE diseases (
 	id_diseases SERIAL PRIMARY KEY,
-	code_diseases INT(10) COMMENT 'РєРѕРґ Р·Р°Р±РѕР»РµРІР°РЅРёСЏ',
-	name__diseases VARCHAR(200) COMMENT 'РЅР°Р·РІР°РЅРёРµ Р·Р°Р±РѕР»РµРІР°РЅРёСЏ',
-	notice_diseases VARCHAR(200) COMMENT 'РїСЂРёРјРµС‡Р°РЅРёРµ');
+	code_diseases INT(10) COMMENT 'код заболевания',
+	name__diseases VARCHAR(200) COMMENT 'название заболевания',
+	notice_diseases VARCHAR(200) COMMENT 'примечание',
+	INDEX code_diseases_idx (code_diseases),
+	INDEX name__diseases_idx (name__diseases));
 
 
--- РїРѕР»СЊР·РѕРІР°С‚РµР»Рё Р‘Р” --
+-- пользователи БД --
 DROP TABLE IF EXISTS user_profiles;
 CREATE TABLE user_profiles (
 	id_user SERIAL PRIMARY KEY,
-	firstname VARCHAR(50) COMMENT 'РРјСЏ',
-	lastname VARCHAR(50) COMMENT 'Р¤Р°РјРёР»РёСЏ',
-	middlename VARCHAR(50) COMMENT 'РћС‚С‡РµСЃС‚РІРѕ',
+	firstname VARCHAR(50) COMMENT 'Имя',
+	lastname VARCHAR(50) COMMENT 'Фамилия',
+	middlename VARCHAR(50) COMMENT 'Отчество',
 	birthday DATE,
-	gender ENUM('РњСѓР¶С‡РёРЅР°', 'Р–РµРЅС‰РёРЅР°'),
+	gender ENUM('Мужчина', 'Женщина'),
 	email VARCHAR(120) UNIQUE,
-	post BIGINT UNSIGNED NOT NULL COMMENT 'РєРѕРґ РґРѕР»Р¶РЅРѕСЃС‚Рё',
-	role BIGINT UNSIGNED NOT NULL COMMENT 'СЂРѕР»СЊ',
-	filial BIGINT UNSIGNED NOT NULL COMMENT 'С„РёР»РёР°Р»',
-	department VARCHAR(50) COMMENT 'РѕС‚РґРµР»РµРЅРёРµ',
+	post BIGINT UNSIGNED NOT NULL COMMENT 'код должности',
+	role BIGINT UNSIGNED NOT NULL COMMENT 'роль',
+	filial BIGINT UNSIGNED NOT NULL COMMENT 'филиал',
+	department VARCHAR(50) COMMENT 'отделение',
 	created_at DATETIME DEFAULT NOW(),
 	INDEX firstname_idx (firstname),
 	INDEX lastname_idx (lastname),
@@ -90,21 +92,21 @@ CREATE TABLE user_profiles (
 	FOREIGN KEY (role) REFERENCES user_roles(id_roles) ON UPDATE CASCADE,
 	FOREIGN KEY (filial) REFERENCES filials(id_filials) ON UPDATE CASCADE);
 
--- СЃРїРёСЃРѕРє РїР°С†РёРµРЅС‚РѕРІ --
+-- список пациентов --
 DROP TABLE IF EXISTS patient_profiles;
 CREATE TABLE patient_profiles (
 	id_profiles SERIAL PRIMARY KEY,
-	firstname VARCHAR(50) COMMENT 'РРјСЏ',
-	lastname VARCHAR(50) COMMENT 'Р¤Р°РјРёР»РёСЏ',
-	middlename VARCHAR(50) COMMENT 'РћС‚С‡РµСЃС‚РІРѕ',
+	firstname VARCHAR(50) COMMENT 'Имя',
+	lastname VARCHAR(50) COMMENT 'Фамилия',
+	middlename VARCHAR(50) COMMENT 'Отчество',
 	birthday DATE,
-	gender ENUM('РњСѓР¶С‡РёРЅР°', 'Р–РµРЅС‰РёРЅР°'),
+	gender ENUM('Мужчина', 'Женщина'),
 	email VARCHAR(120) UNIQUE,
 	phone BIGINT,
-	police VARCHAR(50) COMMENT 'в„– СЃС‚СЂР°С…РѕРІРѕРіРѕ РїРѕР»РёСЃР°',
-	hometown VARCHAR(200) COMMENT 'Р°РґСЂРµСЃ РјРµСЃС‚Р° Р¶РёС‚РµР»СЊСЃС‚РІР°',
+	police VARCHAR(50) COMMENT '№ страхового полиса',
+	hometown VARCHAR(200) COMMENT 'адрес места жительства',
 	created_at DATETIME DEFAULT NOW(),
-	medical_card BIGINT COMMENT 'в„– СЌР»РµРєС‚СЂРѕРЅРЅРѕР№ РјРµРґРёС†РёРЅСЃРєРѕР№ РєР°СЂС‚С‹',
+	medical_card BIGINT COMMENT '№ электронной медицинской карты',
 	INDEX firstname_idx (firstname),
 	INDEX lastname_idx (lastname),
 	INDEX middlename_idx (middlename),
@@ -113,17 +115,68 @@ CREATE TABLE patient_profiles (
 
 
 
--- СЂР°СЃРїРёСЃР°РЅРёРµ РїСЂРёРµРјР° --
+-- расписание приема --
 DROP TABLE IF EXISTS schedule;
 CREATE TABLE schedule (
 	id_schedule SERIAL PRIMARY KEY,
-	date_schedule DATETIME COMMENT 'РЅР° РєР°РєСѓСЋ РґР°С‚Сѓ Р·Р°РїРёСЃСЊ',
-	user_schedule BIGINT UNSIGNED NOT NULL COMMENT 'РІСЂР°С‡',
-	patient_schedule BIGINT UNSIGNED NOT NULL COMMENT 'РїР°С†РёРµРЅС‚',
+	date_schedule DATETIME COMMENT 'на какую дату запись',
+	user_schedule BIGINT UNSIGNED NOT NULL COMMENT 'врач',
+	patient_schedule BIGINT UNSIGNED NOT NULL COMMENT 'пациент',
 	created_schedule DATETIME DEFAULT NOW(),
 	FOREIGN KEY (user_schedule) REFERENCES user_profiles(id_user) ON UPDATE CASCADE,
-	FOREIGN KEY (patient_schedule) REFERENCES patient_profiles(id_profiles) ON UPDATE CASCADE
-	);
+	FOREIGN KEY (patient_schedule) REFERENCES patient_profiles(id_profiles) ON UPDATE CASCADE,
+	INDEX user_schedule_idx (user_schedule),
+	INDEX patient_schedule_idx (patient_schedule));
+
+
+
+-- электронная медицинская карта пациента --
+DROP TABLE IF EXISTS medical_cards;
+CREATE TABLE medical_cards (
+	id_medical SERIAL PRIMARY KEY,
+	number_medical INT(10) COMMENT 'номер карты',
+	id_patients_medical BIGINT UNSIGNED NOT NULL COMMENT 'ID пациента',
+	id_user_medical BIGINT UNSIGNED NOT NULL COMMENT 'ID врача',
+	created_at DATETIME DEFAULT NOW(),
+	code_diseases_medical BIGINT UNSIGNED NOT NULL COMMENT 'код заболевания',
+	code_drugs_medical BIGINT UNSIGNED NOT NULL COMMENT 'код лекарства',
+	diseases_medical TEXT COMMENT 'ДИАГНОЗ.итоги осмотра врача',
+	number_chambers_medical BIGINT UNSIGNED NOT NULL COMMENT 'номер палаты',
+	dateto_chamber_medical DATETIME COMMENT 'дата размещения в палате стационара',
+	dateoff_chamber_medical DATETIME COMMENT 'дата выписки из палаты стационара',
+	FOREIGN KEY (id_patients_medical) REFERENCES patient_profiles(id_profiles),	
+	FOREIGN KEY (id_user_medical) REFERENCES user_profiles(id_user),
+	FOREIGN KEY (code_diseases_medical) REFERENCES diseases(id_diseases),
+	FOREIGN KEY (code_drugs_medical) REFERENCES drugs(id_chambers),
+	FOREIGN KEY (number_chambers_medical) REFERENCES chambers(id_chambers),
+	INDEX number_medical_idx (number_medical),
+	INDEX id_patients_medical_idx (id_patients_medical),
+	INDEX id_user_medical_idx (id_user_medical));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	
