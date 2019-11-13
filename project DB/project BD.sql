@@ -47,7 +47,7 @@ CREATE TABLE drugs (
 	notice_drugs VARCHAR(200) COMMENT 'примечание');
 
 
--- палаты стационара --
+-- отделения и палаты стационара --
 DROP TABLE IF EXISTS chambers;
 CREATE TABLE chambers (
 	id_chambers SERIAL PRIMARY KEY,
@@ -61,7 +61,7 @@ CREATE TABLE chambers (
 DROP TABLE IF EXISTS diseases;
 CREATE TABLE diseases (
 	id_diseases SERIAL PRIMARY KEY,
-	code_diseases INT(10) COMMENT 'код заболевания',
+	code_diseases CHAR(10) COMMENT 'код заболевания',
 	name__diseases VARCHAR(200) COMMENT 'название заболевания',
 	notice_diseases VARCHAR(200) COMMENT 'примечание',
 	INDEX code_diseases_idx (code_diseases),
@@ -71,7 +71,7 @@ CREATE TABLE diseases (
 -- пользователи БД --
 DROP TABLE IF EXISTS user_profiles;
 CREATE TABLE user_profiles (
-	id_user SERIAL PRIMARY KEY,
+	id_user SERIAL PRIMARY KEY AUTO_INCREMENT,
 	firstname VARCHAR(50) COMMENT 'Имя',
 	lastname VARCHAR(50) COMMENT 'Фамилия',
 	middlename VARCHAR(50) COMMENT 'Отчество',
@@ -81,7 +81,7 @@ CREATE TABLE user_profiles (
 	post BIGINT UNSIGNED NOT NULL COMMENT 'код должности',
 	role BIGINT UNSIGNED NOT NULL COMMENT 'роль',
 	filial BIGINT UNSIGNED NOT NULL COMMENT 'филиал',
-	department VARCHAR(50) COMMENT 'отделение',
+	department BIGINT UNSIGNED NOT NULL COMMENT 'отделение',
 	created_at DATETIME DEFAULT NOW(),
 	INDEX firstname_idx (firstname),
 	INDEX lastname_idx (lastname),
@@ -90,12 +90,13 @@ CREATE TABLE user_profiles (
 	INDEX role_idx (role),
 	FOREIGN KEY (post) REFERENCES user_posts(id_posts) ON UPDATE CASCADE,
 	FOREIGN KEY (role) REFERENCES user_roles(id_roles) ON UPDATE CASCADE,
-	FOREIGN KEY (filial) REFERENCES filials(id_filials) ON UPDATE CASCADE);
+	FOREIGN KEY (filial) REFERENCES filials(id_filials) ON UPDATE CASCADE,
+	FOREIGN KEY (department) REFERENCES chambers(id_chambers) ON UPDATE CASCADE);
 
 -- список пациентов --
 DROP TABLE IF EXISTS patient_profiles;
 CREATE TABLE patient_profiles (
-	id_profiles SERIAL PRIMARY KEY,
+	id_profiles SERIAL PRIMARY KEY AUTO_INCREMENT,
 	firstname VARCHAR(50) COMMENT 'Имя',
 	lastname VARCHAR(50) COMMENT 'Фамилия',
 	middlename VARCHAR(50) COMMENT 'Отчество',
@@ -106,7 +107,7 @@ CREATE TABLE patient_profiles (
 	police VARCHAR(50) COMMENT '№ страхового полиса',
 	hometown VARCHAR(200) COMMENT 'адрес места жительства',
 	created_at DATETIME DEFAULT NOW(),
-	medical_card BIGINT COMMENT '№ электронной медицинской карты',
+	medical_card BIGINT UNSIGNED NOT NULL COMMENT '№ электронной медицинской карты',
 	INDEX firstname_idx (firstname),
 	INDEX lastname_idx (lastname),
 	INDEX middlename_idx (middlename),
@@ -118,7 +119,7 @@ CREATE TABLE patient_profiles (
 -- расписание приема --
 DROP TABLE IF EXISTS schedule;
 CREATE TABLE schedule (
-	id_schedule SERIAL PRIMARY KEY,
+	id_schedule SERIAL PRIMARY KEY KEY AUTO_INCREMENT,
 	date_schedule DATETIME COMMENT 'на какую дату запись',
 	user_schedule BIGINT UNSIGNED NOT NULL COMMENT 'врач',
 	patient_schedule BIGINT UNSIGNED NOT NULL COMMENT 'пациент',
@@ -133,8 +134,8 @@ CREATE TABLE schedule (
 -- электронная медицинская карта пациента --
 DROP TABLE IF EXISTS medical_cards;
 CREATE TABLE medical_cards (
-	id_medical SERIAL PRIMARY KEY,
-	number_medical INT(10) COMMENT 'номер карты',
+	id_medical SERIAL PRIMARY KEY KEY AUTO_INCREMENT,
+	number_medical BIGINT UNSIGNED NOT NULL COMMENT 'номер карты',
 	id_patients_medical BIGINT UNSIGNED NOT NULL COMMENT 'ID пациента',
 	id_user_medical BIGINT UNSIGNED NOT NULL COMMENT 'ID врача',
 	created_at DATETIME DEFAULT NOW(),
@@ -149,41 +150,18 @@ CREATE TABLE medical_cards (
 	FOREIGN KEY (code_diseases_medical) REFERENCES diseases(id_diseases),
 	FOREIGN KEY (code_drugs_medical) REFERENCES drugs(id_chambers),
 	FOREIGN KEY (number_chambers_medical) REFERENCES chambers(id_chambers),
+	FOREIGN KEY (number_medical) REFERENCES patient_profiles(medical_card),
 	INDEX number_medical_idx (number_medical),
 	INDEX id_patients_medical_idx (id_patients_medical),
 	INDEX id_user_medical_idx (id_user_medical));
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-	
+-- исследовательсике снимки пациента --
+DROP TABLE IF EXISTS patien_photo;
+CREATE TABLE patien_photo (
+	id_photo SERIAL PRIMARY KEY KEY AUTO_INCREMENT,
+	patien_id_photo BIGINT UNSIGNED NOT NULL COMMENT 'ID пациента',
+	name_photo	VARCHAR(200) UNIQUE COMMENT 'имя файла',
+	FOREIGN KEY (patien_id_photo) REFERENCES patient_profiles(id_profiles) ON UPDATE CASCADE,
+	INDEX id_photo__patien_id_photo_idx (id_photo,patien_id_photo));
 
