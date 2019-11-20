@@ -16,3 +16,9 @@ JOIN medical_cards AS m ON p.id_profiles = m.id_patients_medical
 JOIN user_profiles AS u ON m.id_user_medical = u.id_user
 JOIN user_posts AS up ON u.post = up.id_posts
 ORDER BY CONCAT (p.lastname,'  ',p.firstname,'  ', p.middlename);
+
+
+-- представление (VIEW) --
+CREATE OR REPLACE  VIEW pat AS SELECT * FROM patient_profiles ORDER BY lastname;
+SHOW TABLES;
+SELECT * FROM pat;
